@@ -5,7 +5,7 @@ from time import sleep
 from playwright.async_api import async_playwright, Playwright
 from trafilatura import extract
 
-from summary_bot.settings import (
+from settings import (
     FROM_DOCKER,
     HEADERS,
     EXTRA_HTTP_HEADERS,

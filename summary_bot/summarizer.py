@@ -3,7 +3,7 @@ from typing import Tuple
 import torch
 from transformers import BartForConditionalGeneration, AutoTokenizer
 
-from summary_bot.settings import DEFAULT_MODEL_NAME, logger
+from settings import DEFAULT_MODEL_NAME, logger
 
 
 class Singleton(type):
