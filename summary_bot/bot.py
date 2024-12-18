@@ -28,12 +28,10 @@ async def get_summary(message: types.Message):
         article = await extract_article(user_input)
 
         logger.info("Summarizing article...")
-        # summary = await summarize_article(article, message, model_name=MODEL_NAME)
-        summaries = await summarize_article(article, message, model_name=MODEL_NAME)
+        summary = await summarize_article(article, message, model_name=MODEL_NAME)
         logger.info("Done summarizing article")
 
-        for summary in summaries:
-            await message.reply(summary)
+        await message.reply(summary)
 
     except Exception as err:
         logger.error("Error while summarizing article", exc_info=err)
