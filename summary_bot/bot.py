@@ -1,8 +1,8 @@
 from aiogram import Bot, Dispatcher, executor, types
-
-from summary_bot.scraper import extract_article
-from summary_bot.settings import BOT_TOKEN, MODEL_NAME, logger
-from summary_bot.summarizer import summarize_article
+import html
+from scraper import extract_article
+from settings import BOT_TOKEN, MODEL_NAME, logger
+from summarizer import summarize_article
 
 bot = Bot(token=BOT_TOKEN, parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot)
@@ -28,16 +28,19 @@ async def get_summary(message: types.Message):
         article = await extract_article(user_input)
 
         logger.info("Summarizing article...")
-        # summary = await summarize_article(article, message, model_name=MODEL_NAME)
+        #summary = await summarize_article(article, message, model_name=MODEL_NAME)
         summaries = await summarize_article(article, message, model_name=MODEL_NAME)
         logger.info("Done summarizing article")
 
         for summary in summaries:
-            await message.reply(summary)
+            safe_summary = html.escape(summary)
+            await message.reply(safe_summary, parse_mode=None)
+        #await message.reply(summary)
 
     except Exception as err:
         logger.error("Error while summarizing article", exc_info=err)
-        await message.reply(f"Error while summarizing article:\n\n{err}")
+        error_message = html.escape(str(err))
+        await message.reply(f"Error while summarizing article:\n\n{error_message}")
 
 
 if __name__ == "__main__":
