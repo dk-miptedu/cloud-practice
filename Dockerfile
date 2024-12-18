@@ -14,7 +14,8 @@ WORKDIR /opt/app
 
 RUN pip install -r requirements.txt
 
-RUN playwright install firefox
+RUN playwright install 
+#firefox
 RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
     && mkdir -p /home/pptruser/Downloads \
     && chown -R pptruser:pptruser /home/pptruser

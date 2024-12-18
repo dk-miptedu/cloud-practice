@@ -3,7 +3,7 @@ import os
 
 # Log configuration
 logger = logging.getLogger("ai_summary_bot")
-logger.setLevel(os.getenv("LOG_LEVEL", "INFO"))
+logger.setLevel(os.getenv("LOG_LEVEL", "DEBUG"))
 
 # Telegram bot configuration
 BOT_TOKEN = os.getenv("BOT_TOKEN")
