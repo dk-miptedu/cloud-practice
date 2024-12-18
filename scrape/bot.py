@@ -1,8 +1,8 @@
 from aiogram import Bot, Dispatcher, executor, types
 
-from summary_bot.scraper import extract_article
-from summary_bot.settings import BOT_TOKEN, MODEL_NAME, logger
-from summary_bot.summarizer import summarize_article
+from scraper import extract_article
+from settings import BOT_TOKEN, MODEL_NAME, logger
+from summarizer import summarize_article
 
 bot = Bot(token=BOT_TOKEN, parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot)

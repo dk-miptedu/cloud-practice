@@ -5,7 +5,7 @@ from time import sleep
 from playwright.async_api import async_playwright, Playwright
 from trafilatura import extract
 
-from summary_bot.settings import (
+from settings import (
     FROM_DOCKER,
     HEADERS,
     EXTRA_HTTP_HEADERS,
@@ -26,7 +26,7 @@ async def extract_article(url: str) -> str:
       context = await browser.new_context()
       page = await context.new_page()
       await page.goto(url)
-      # time.sleep(7)
+      time.sleep(7)
       content = await page.content()
     # Extract content from the HTML page
     article = extract(content, favor_recall=True, include_comments=False)

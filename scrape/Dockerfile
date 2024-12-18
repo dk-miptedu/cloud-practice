@@ -18,7 +18,7 @@ RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
     && chown -R pptruser:pptruser /home/pptruser
 
 COPY . /opt/app
-RUN pip install -e .
+#RUN pip install -e .
 
 USER pptruser
 ARG FROM_DOCKER=1

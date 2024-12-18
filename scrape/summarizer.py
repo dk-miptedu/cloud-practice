@@ -3,7 +3,7 @@ from typing import Tuple
 import torch
 from transformers import BartForConditionalGeneration, AutoTokenizer
 
-from summary_bot.settings import DEFAULT_MODEL_NAME, logger
+from settings import DEFAULT_MODEL_NAME, logger
 
 
 class Singleton(type):
@@ -93,6 +93,6 @@ async def summarize_article(
     model = SummaryModel(model_name)
     batches = await model.prepare_batch(content, message)
     content_summaries = model.get_summary(batches)
-    return content_summaries
+    #return content_summaries
     summary_html = prettify(content_summaries)
     return summary_html
