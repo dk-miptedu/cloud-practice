@@ -14,35 +14,34 @@ WORKDIR /opt/app
 
 RUN pip install -r requirements.txt
 
-RUN playwright install 
+RUN playwright install firefox chromium
 #firefox
 RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
     && mkdir -p /home/pptruser/Downloads \
     && chown -R pptruser:pptruser /home/pptruser
 
+
 RUN pip install lxml_html_clean
 RUN pip install pyppeteer==1.0.2
 RUN pip install --upgrade pyee
 
-#RUN playwright install-deps    
+RUN playwright install-deps  
+RUN chown -R pptruser:pptruser /opt/app  
 #COPY .env .    
 
 COPY . /opt/app
-#RUN pip install -e .
 
-USER pptruser
+USER root 
 
 ARG FROM_DOCKER=1
 ARG BOT_TOKEN
 
 ENV BOT_TOKEN=$BOT_TOKEN
-ENV MODEL_NAME = "facebook/bart-large-cnn"
+ENV MODEL_NAME='sshleifer/distilbart-cnn-12-6' 
+#'facebook/bart-large-cnn'
 
 ENV FROM_DOCKER=$FROM_DOCKER
 ENV LOG_LEVEL=DEBUG
 
-# test must pass in order to check that all dependencies for Pyppeteer are properly installed
-# RUN pytest tests -srA
-#RUN chmod -R 755 /home/pptruser/.cache/ms-playwright
 
 CMD ["python3", "summary_bot/bot.py"]
